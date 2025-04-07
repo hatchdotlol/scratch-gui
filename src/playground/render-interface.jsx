@@ -54,14 +54,6 @@ const handleClickAddonSettings = addonId => {
     window.open(url);
 };
 
-const messages = defineMessages({
-    defaultTitle: {
-        defaultMessage: 'Run Scratch projects faster',
-        description: 'Title of homepage',
-        id: 'tw.guiDefaultTitle'
-    }
-});
-
 const WrappedMenuBar = compose(
     SBFileUploaderHOC,
     TWPackagerIntegrationHOC
@@ -204,7 +196,7 @@ class Interface extends React.Component {
     }
     handleUpdateProjectTitle (title, isDefault) {
         if (isDefault || !title) {
-            document.title = `${APP_NAME} - ${this.props.intl.formatMessage(messages.defaultTitle)}`;
+            document.title = `${APP_NAME} Editor`;
         } else {
             document.title = `${title} - ${APP_NAME}`;
         }
