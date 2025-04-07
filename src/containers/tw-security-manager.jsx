@@ -81,7 +81,12 @@ const isAlwaysTrustedForFetching = parsed => (
     parsed.origin === 'https://httpbin.org' ||
 
     // ScratchDB
-    parsed.origin === 'https://scratchdb.lefty.one'
+    parsed.origin === 'https://scratchdb.lefty.one' ||
+
+    // Hatch.lol
+    parsed.origin === 'https://hatch.lol' ||
+    parsed.origin.endsWith('.hatch.lol') ||
+    parsed.origin === 'https://hatchsaves.raynec.dev'
 );
 
 const FETCHABLE_PROTOCOLS = [
