@@ -66,6 +66,7 @@ const Credits = () => (
         </section>
         {APP_NAME !== 'TurboWarp' && (
             // Be kind and considerate. Don't remove this :)
+            // okay
             <section>
                 <h2>TurboWarp</h2>
                 <p>
