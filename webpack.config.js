@@ -181,16 +181,16 @@ module.exports = [
                 'process.env.ROOT': JSON.stringify(root),
                 'process.env.ROUTING_STYLE': JSON.stringify(process.env.ROUTING_STYLE || 'filehash')
             }),
+            // new HtmlWebpackPlugin({
+            //     chunks: ['editor'],
+            //     template: 'src/playground/index.ejs',
+            //     filename: 'editor.html',
+            //     title: `${APP_NAME} - Run Scratch projects faster`,
+            //     isEditor: true,
+            //     ...htmlWebpackPluginCommon
+            // }),
             new HtmlWebpackPlugin({
                 chunks: ['editor'],
-                template: 'src/playground/index.ejs',
-                filename: 'editor.html',
-                title: `${APP_NAME} - Run Scratch projects faster`,
-                isEditor: true,
-                ...htmlWebpackPluginCommon
-            }),
-            new HtmlWebpackPlugin({
-                chunks: ['player'],
                 template: 'src/playground/index.ejs',
                 filename: 'index.html',
                 title: `${APP_NAME} - Run Scratch projects faster`,
