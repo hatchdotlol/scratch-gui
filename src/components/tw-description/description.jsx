@@ -46,13 +46,13 @@ const Description = ({
     <div className={styles.description}>
         <div className={styles.projectLink}>
             <a
-                href={`https://scratch.mit.edu/projects/${projectId}/`}
+                href={`https://dev.hatch.lol/project/?id=${projectId}`}
                 target="_blank"
                 rel="noreferrer"
             >
                 <FormattedMessage
-                    defaultMessage="View project on Scratch"
-                    description="Link to view project on Scratch"
+                    defaultMessage="View project on Hatch.lol"
+                    description="Link to view project on Hatch.lol"
                     id="tw.viewOnScratch"
                 />
             </a>
@@ -61,8 +61,8 @@ const Description = ({
             <div>
                 <h2 className={styles.header}>
                     <FormattedMessage
-                        defaultMessage="Instructions"
-                        description="Header for instructions section of description"
+                        defaultMessage="Description"
+                        description="Header for description"
                         id="tw.home.instructions"
                     />
                 </h2>

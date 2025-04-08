@@ -8,8 +8,7 @@ import {setAuthor, setDescription} from '../reducers/tw';
 
 export const fetchProjectMeta = async projectId => {
     const urls = [
-        `https://trampoline.turbowarp.org/api/projects/${projectId}`,
-        `https://trampoline.turbowarp.xyz/api/projects/${projectId}`
+        `https://api.hatch.lol/projects/${projectId}`
     ];
     let firstError;
     for (const url of urls) {
@@ -70,12 +69,11 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                             this.props.onSetProjectTitle(title);
                         }
                         const authorName = data.author.username;
-                        const authorThumbnail = `https://trampoline.turbowarp.org/avatars/${data.author.id}`;
+                        const authorThumbnail = `https://api.hatch.lol${data.author.profilePicture}?size=40`;
                         this.props.onSetAuthor(authorName, authorThumbnail);
-                        const instructions = data.instructions || '';
-                        const credits = data.description || '';
-                        if (instructions || credits) {
-                            this.props.onSetDescription(instructions, credits);
+                        const instructions = data.description || '';
+                        if (instructions) {
+                            this.props.onSetDescription(instructions, "");
                         }
                         setIndexable(true);
                     })
