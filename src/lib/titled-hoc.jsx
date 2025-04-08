@@ -13,9 +13,35 @@ const messages = defineMessages({
     defaultProjectTitle: {
         id: 'tw.gui.defaultProjectTitle',
         description: 'Default title for project',
-        defaultMessage: 'Hatch Project'
+        defaultMessage: "Hatch Project"
     }
 });
+
+const getHatchProjectTitle = () => {
+    let assetPromise;
+    // In case running in node...
+    let projectUrl = typeof URLSearchParams === 'undefined' ?
+        null :
+        new URLSearchParams(location.search).get('project');
+    if (projectUrl) {
+        let projectId = parseInt(projectUrl);
+        if (isNaN(projectId)) {
+            throw new Error("Project ID is NaN");
+        } else {
+            return fetch(`https://api.hatch.lol/projects/${projectId}/`)
+                .then(r => {
+                    if (!r.ok) {
+                        throw new Error(`Request returned status ${r.status}`);
+                    }
+                    return r.json();
+                })
+                .then(data => {
+                    return data.title;
+                });
+        }
+    }
+    return "Hatch Project";
+}
 
 /* Higher Order Component to get and set the project title
  * @param {React.Component} WrappedComponent component to receive project title related props
@@ -26,14 +52,14 @@ const TitledHOC = function (WrappedComponent) {
         componentDidMount () {
             this.handleReceivedProjectTitle(this.props.projectTitle);
         }
-        componentDidUpdate (prevProps) {
+        async componentDidUpdate (prevProps) {
             if (this.props.projectTitle !== prevProps.projectTitle) {
                 this.handleReceivedProjectTitle(this.props.projectTitle);
             }
             // if project is a new default project, and has loaded,
             if (this.props.isShowingWithoutId && prevProps.isAnyCreatingNewState) {
                 // reset title to default
-                const defaultProjectTitle = this.handleReceivedProjectTitle();
+                const defaultProjectTitle = this.handleReceivedProjectTitle(await getHatchProjectTitle());
                 this.props.onUpdateProjectTitle(defaultProjectTitle, true);
             }
             // if the projectTitle hasn't changed, but the reduxProjectTitle
@@ -47,7 +73,7 @@ const TitledHOC = function (WrappedComponent) {
                 );
             }
         }
-        handleReceivedProjectTitle (requestedTitle) {
+        async handleReceivedProjectTitle (requestedTitle) {
             let newTitle = requestedTitle;
             let isDefault = false;
             if (newTitle === null || typeof newTitle === 'undefined') {
