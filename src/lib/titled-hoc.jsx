@@ -20,9 +20,7 @@ const messages = defineMessages({
 const getHatchProjectTitle = () => {
     let assetPromise;
     // In case running in node...
-    let projectUrl = typeof URLSearchParams === 'undefined' ?
-        null :
-        new URLSearchParams(location.search).get('project');
+    let projectUrl = location.hash.slice(1);
     if (projectUrl) {
         let projectId = parseInt(projectUrl);
         if (isNaN(projectId)) {

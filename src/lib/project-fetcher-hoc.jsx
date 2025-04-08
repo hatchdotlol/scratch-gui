@@ -107,13 +107,11 @@ const ProjectFetcherHOC = function (WrappedComponent) {
 
             let assetPromise;
             // In case running in node...
-            let projectUrl = typeof URLSearchParams === 'undefined' ?
-                null :
-                new URLSearchParams(location.search).get('project');
+            let projectUrl = location.hash.slice(1);
             if (projectUrl) {
                 let projectId = parseInt(projectUrl);
                 if (isNaN(projectId)) {
-                    throw new Error("Project ID is NaN");
+                    throw new Error(`Project ID is NaN (${projectUrl})`);
                 } else {
                     assetPromise = fetch(`https://api.hatch.lol/projects/${projectId}/content`)
                         .then(r => {
