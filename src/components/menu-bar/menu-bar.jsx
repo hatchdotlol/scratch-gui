@@ -26,6 +26,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import SettingsMenu from './settings-menu.jsx';
+import LoginDropdown from './login-dropdown.jsx';
 
 import FramerateChanger from '../../containers/tw-framerate-changer.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
@@ -985,6 +986,32 @@ class MenuBar extends React.Component {
                     <TWSaveStatus
                         showSaveFilePicker={this.props.showSaveFilePicker}
                     />
+                    <React.Fragment>
+                        <MenuBarItemTooltip
+                            id="account-nav"
+                            place={this.props.isRtl ? 'right' : 'left'}
+                        >
+                            <div
+                                className={classNames(
+                                    styles.menuBarItem,
+                                    styles.hoverable,
+                                    styles.accountNavMenu
+                                )}
+                            >
+                                <img
+                                    className={styles.profileIcon}
+                                    src={profileIcon}
+                                />
+                                <span>
+                                    {'Hatch'}
+                                </span>
+                                <img
+                                    className={styles.dropdownCaretIcon}
+                                    src={dropdownCaret}
+                                />
+                            </div>
+                        </MenuBarItemTooltip>
+                    </React.Fragment>
                 </div>
 
                 {aboutButton}
