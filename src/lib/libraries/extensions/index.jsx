@@ -415,7 +415,7 @@ export const galleryLoading = {
             }}
         />
     ),
-    href: 'http://localhost:8000/',
+    href: 'https://extensionshatch.raynec.dev/',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (
@@ -441,7 +441,7 @@ export const galleryMore = {
             }}
         />
     ),
-    href: 'http://localhost:8000/',
+    href: 'https://extensionshatch.raynec.dev/',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (
@@ -467,7 +467,7 @@ export const galleryError = {
             }}
         />
     ),
-    href: 'http://localhost:8000/',
+    href: 'https://extensionshatch.raynec.dev/',
     extensionId: 'gallery',
     iconURL: galleryIcon,
     description: (

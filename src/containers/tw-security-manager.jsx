@@ -25,10 +25,10 @@ const manuallyTrustExtension = url => {
  */
 const isTrustedExtension = url => (
     // Always trust our official extension repostiory.
-    url.startsWith('http://localhost:8000/') ||
+    url.startsWith('https://extensionshatch.raynec.dev/') ||
 
     // For development.
-    url.startsWith('http://localhost:8000/') ||
+    url.startsWith('https://extensionshatch.raynec.dev/') ||
 
     extensionsTrustedByUser.has(url)
 );
