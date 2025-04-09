@@ -5,7 +5,7 @@ import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-int
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
-import React, { setState } from 'react';
+import React from 'react';
 
 import VM from 'scratch-vm';
 
@@ -28,6 +28,7 @@ import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import SettingsMenu from './settings-menu.jsx';
 import LoginDropdown from './login-dropdown.jsx';
 import AccountNavComponent from './account-nav.jsx';
+import HatchLogin from '../hatch-login/hatch-login.jsx';
 
 import FramerateChanger from '../../containers/tw-framerate-changer.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
@@ -213,9 +214,10 @@ class MenuBar extends React.Component {
         super(props);
         this.state = {
             user: {
-                name: "Hatch"
+                name: null
             },
-            profileOpen: false
+            profileOpen: false,
+            login: false
         }
         bindAll(this, [
             'handleClickSeeInside',
@@ -1000,34 +1002,7 @@ class MenuBar extends React.Component {
                     <TWSaveStatus
                         showSaveFilePicker={this.props.showSaveFilePicker}
                     />
-                    {document.cookie === "" ? (
-                        <React.Fragment>
-                            <MenuBarItemTooltip
-                                id="account-nav"
-                                place={this.props.isRtl ? 'right' : 'left'}
-                            >
-                                <div
-                                    className={classNames(
-                                        styles.menuBarItem,
-                                        styles.hoverable,
-                                        styles.accountNavMenu
-                                    )}
-                                >
-                                    <img
-                                        className={styles.profileIcon}
-                                        src={profileIcon}
-                                    />
-                                    <span>
-                                        {'Hatch'}
-                                    </span>
-                                    <img
-                                        className={styles.dropdownCaretIcon}
-                                        src={dropdownCaret}
-                                    />
-                                </div>
-                            </MenuBarItemTooltip>
-                        </React.Fragment>
-                    ) : (
+                    {document.cookie !== "null" ? (
                         <React.Fragment>
                             <AccountNavComponent
                                 className={classNames(styles.menuBarItem, styles.hoverable)}
@@ -1044,15 +1019,27 @@ class MenuBar extends React.Component {
                                 </span>
                             </div>
                         </React.Fragment>
+                    ) : (
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable)}
+                            onClick={()=>{this.setState({ login: true })}}
+                        >
+                            <span className={styles.collapsibleLabel}>
+                                Log in
+                            </span>
+                        </div>
                     )}
                 </div>
 
                 {aboutButton}
+
+                {this.state.login ? (
+                    <HatchLogin />
+                ) : ""}
             </Box>
-        );
+        )
     }
 }
-
 
 MenuBar.propTypes = {
     enableSeeInside: PropTypes.bool,

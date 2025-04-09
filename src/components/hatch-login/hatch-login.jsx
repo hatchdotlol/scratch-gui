@@ -10,8 +10,8 @@ const HatchLogin = function () {
                 styles.loginWrapper
             )}
         >
-            <h1>This project is rated 13+</h1>
-            <p>Please sign in to your Hatch account to view this project.</p>
+            <h1>Hatch.lol Authentication</h1>
+            <p>Please sign in to your Hatch account to continue.</p>
             <form
                 className={classNames(
                     styles.teenForm
