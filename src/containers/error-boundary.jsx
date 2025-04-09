@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CrashMessageComponent from '../components/crash-message/crash-message.jsx';
+import HatchLogin from '../components/hatch-login/hatch-login.jsx';
 import log from '../lib/log.js';
 
 class ErrorBoundary extends React.Component {
@@ -30,10 +31,27 @@ class ErrorBoundary extends React.Component {
         // only remember the first error: later errors might just be side effects of that first one
         if (!this.state.error) {
             // store error & errorInfo for debugging
-            this.setState({
-                error,
-                errorInfo
-            });
+            if (error.message === "Request returned status 404") {
+                fetch(`https://api.hatch.lol/projects/${location.hash.slice(1)}`).then(res => {
+                    if (res.ok) {
+                        error = "HATCHDOTLOL_AUTH";
+                        this.setState({
+                            error,
+                            errorInfo
+                        });
+                    } else {
+                        this.setState({
+                            error,
+                            errorInfo
+                        });
+                    }
+                })
+            } else {
+                this.setState({
+                    error,
+                    errorInfo
+                });
+            }
         }
 
         // report every error in the console
@@ -76,6 +94,9 @@ class ErrorBoundary extends React.Component {
 
     render () {
         if (this.state.error) {
+            if (this.state.error === "HATCHDOTLOL_AUTH") {
+                return (<HatchLogin/>);
+            }
             return (
                 <CrashMessageComponent
                     errorMessage={this.formatErrorMessage()}

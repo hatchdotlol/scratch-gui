@@ -5,7 +5,7 @@ import {defineMessages, FormattedMessage, injectIntl, intlShape} from 'react-int
 import PropTypes from 'prop-types';
 import bindAll from 'lodash.bindall';
 import bowser from 'bowser';
-import React from 'react';
+import React, { setState } from 'react';
 
 import VM from 'scratch-vm';
 
@@ -27,6 +27,7 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import SettingsMenu from './settings-menu.jsx';
 import LoginDropdown from './login-dropdown.jsx';
+import AccountNavComponent from './account-nav.jsx';
 
 import FramerateChanger from '../../containers/tw-framerate-changer.jsx';
 import ChangeUsername from '../../containers/tw-change-username.jsx';
@@ -210,6 +211,12 @@ MenuItemLink.propTypes = {
 class MenuBar extends React.Component {
     constructor (props) {
         super(props);
+        this.state = {
+            user: {
+                name: "Hatch"
+            },
+            profileOpen: false
+        }
         bindAll(this, [
             'handleClickSeeInside',
             'handleClickNew',
@@ -482,6 +489,13 @@ class MenuBar extends React.Component {
         );
         // Show the About button only if we have a handler for it (like in the desktop app)
         const aboutButton = this.buildAboutMenu(this.props.onClickAbout);
+        fetch(`https://api.hatch.lol/auth/me`, { headers: { Token: document.cookie } }).then((res => {
+            if (res.ok) {
+                res.json().then(user => {
+                    this.setState({ user: user });
+                });
+            }
+        }).bind(this));
         return (
             <Box
                 className={classNames(
@@ -986,32 +1000,51 @@ class MenuBar extends React.Component {
                     <TWSaveStatus
                         showSaveFilePicker={this.props.showSaveFilePicker}
                     />
-                    <React.Fragment>
-                        <MenuBarItemTooltip
-                            id="account-nav"
-                            place={this.props.isRtl ? 'right' : 'left'}
-                        >
-                            <div
-                                className={classNames(
-                                    styles.menuBarItem,
-                                    styles.hoverable,
-                                    styles.accountNavMenu
-                                )}
+                    {document.cookie === "" ? (
+                        <React.Fragment>
+                            <MenuBarItemTooltip
+                                id="account-nav"
+                                place={this.props.isRtl ? 'right' : 'left'}
                             >
-                                <img
-                                    className={styles.profileIcon}
-                                    src={profileIcon}
-                                />
-                                <span>
-                                    {'Hatch'}
+                                <div
+                                    className={classNames(
+                                        styles.menuBarItem,
+                                        styles.hoverable,
+                                        styles.accountNavMenu
+                                    )}
+                                >
+                                    <img
+                                        className={styles.profileIcon}
+                                        src={profileIcon}
+                                    />
+                                    <span>
+                                        {'Hatch'}
+                                    </span>
+                                    <img
+                                        className={styles.dropdownCaretIcon}
+                                        src={dropdownCaret}
+                                    />
+                                </div>
+                            </MenuBarItemTooltip>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <AccountNavComponent
+                                className={classNames(styles.menuBarItem, styles.hoverable)}
+                                thumbnailUrl={`https://api.hatch.lol${this.state.user.profilePicture}?size=40`}
+                                username={this.state.user.name}
+                                isOpen={this.state.profileOpen}
+                            />
+                            <div
+                                className={classNames(styles.menuBarItem, styles.hoverable)}
+                                onClick={()=>{document.cookie=null;location.reload();}}
+                            >
+                                <span className={styles.collapsibleLabel}>
+                                    Sign out
                                 </span>
-                                <img
-                                    className={styles.dropdownCaretIcon}
-                                    src={dropdownCaret}
-                                />
                             </div>
-                        </MenuBarItemTooltip>
-                    </React.Fragment>
+                        </React.Fragment>
+                    )}
                 </div>
 
                 {aboutButton}
@@ -1019,6 +1052,7 @@ class MenuBar extends React.Component {
         );
     }
 }
+
 
 MenuBar.propTypes = {
     enableSeeInside: PropTypes.bool,

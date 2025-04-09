@@ -49,13 +49,13 @@ const AccountNavComponent = ({
             <span className={styles.profileName}>
                 {username}
             </span>
-            <div className={styles.dropdownCaretPosition}>
+            {/* <div className={styles.dropdownCaretPosition}>
                 <img
                     className={styles.dropdownCaretIcon}
                     src={dropdownCaret}
                     draggable={false}
                 />
-            </div>
+            </div> */}
         </div>
         <MenuBarMenu
             className={menuBarMenuClassName}

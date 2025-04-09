@@ -113,7 +113,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 if (isNaN(projectId)) {
                     throw new Error(`Project ID is NaN (${projectUrl})`);
                 } else {
-                    assetPromise = fetch(`https://api.hatch.lol/projects/${projectId}/content`)
+                    assetPromise = fetch(`https://api.hatch.lol/projects/${projectId}/content?token=${document.cookie}`)
                         .then(r => {
                             if (!r.ok) {
                                 throw new Error(`Request returned status ${r.status}`);

@@ -1,0 +1,20 @@
+@import "../../css/colors.css";
+
+.login-wrapper {
+  /* background-color: $menu-bar-background; */
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: inherit;
+  gap: 1rem;
+}
+
+.teen-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
