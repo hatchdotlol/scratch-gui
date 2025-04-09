@@ -1031,7 +1031,7 @@ class MenuBar extends React.Component {
                         <React.Fragment>
                             <AccountNavComponent
                                 className={classNames(styles.menuBarItem, styles.hoverable)}
-                                thumbnailUrl={`https://api.hatch.lol${this.state.user.profilePicture}?size=40`}
+                                thumbnailUrl={`https://api.hatch.lol${this.state.user.profilePicture ?? "/uploads/pfp/default.png"}?size=40`}
                                 username={this.state.user.name}
                                 isOpen={this.state.profileOpen}
                             />
