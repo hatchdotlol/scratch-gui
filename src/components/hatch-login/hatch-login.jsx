@@ -23,7 +23,7 @@ const HatchLogin = function () {
             >
                 <label for="username">Username</label>
                 <input type="text" id="username" required /><br />
-                <label for="username">Password</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" required /><br />
                 <input type="submit" value="Sign in" />
             </form>
