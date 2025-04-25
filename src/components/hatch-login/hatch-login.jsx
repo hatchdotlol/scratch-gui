@@ -27,6 +27,9 @@ const HatchLogin = function () {
                 <input type="password" id="password" required /><br />
                 <input type="submit" value="Sign in" />
             </form>
+            <hr />
+            <p>raynec.dev is owned by <a href="https://dev.hatch.lol/user/?u=r">rayne cloudy</a>, a staff member at Hatch.lol.</p>
+            <p>By signing in to this site, you consent to the storage of cookies for strictly functional purposes.</p>
         </div>
     );
 };
