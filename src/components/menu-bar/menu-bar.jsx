@@ -1002,7 +1002,7 @@ class MenuBar extends React.Component {
                     <TWSaveStatus
                         showSaveFilePicker={this.props.showSaveFilePicker}
                     />
-                    {document.cookie !== "null" || document.cookie !== "" ? (
+                    {document.cookie !== "null" && document.cookie !== "" ? (
                         <React.Fragment>
                             <AccountNavComponent
                                 className={classNames(styles.menuBarItem, styles.hoverable)}
