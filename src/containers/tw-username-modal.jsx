@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {setUsername, setUsernameInvalid} from '../reducers/tw';
 import UsernameModalComponent from '../components/tw-username-modal/username-modal.jsx';
 import {closeUsernameModal} from '../reducers/modals';
-import {generateRandomUsername} from '../lib/tw-username';
+import {getUsername} from '../lib/tw-username';
 import isScratchDesktop from '../lib/isScratchDesktop';
 
 class UsernameModal extends React.Component {
@@ -46,7 +46,7 @@ class UsernameModal extends React.Component {
         });
     }
     handleReset () {
-        const randomUsername = isScratchDesktop() ? 'player' : generateRandomUsername();
+        const randomUsername = isScratchDesktop() ? 'player' : getUsername();
         this.props.onCloseUsernameModal();
         this.props.onSetUsername(randomUsername);
     }

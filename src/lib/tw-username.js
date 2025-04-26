@@ -1,11 +1,20 @@
-const generateRandomUsername = () => {
-    const DIGITS = 4;
-    const randomNumber = Math.round(Math.random() * (10 ** DIGITS));
-    const randomId = randomNumber.toString().padStart(DIGITS, '0');
-    const randomUsername = `player${randomId}`;
-    return randomUsername;
-};
+const getUsername = async () => {
+    if (document.cookie === "null" || document.cookie === "") {
+        return "";
+    } else {
+        const res = await fetch("https://api.hatch.lol/auth/me", {
+            headers: {
+                Token: document.cookie
+            }
+        });
+        if (res.ok) {
+            return await (await res.json()).name;
+        } else {
+            return "";
+        }
+    }
+}
 
 export {
-    generateRandomUsername
+    getUsername
 };

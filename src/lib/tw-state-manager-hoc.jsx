@@ -17,7 +17,7 @@ import {
     setPlayer,
     setFullScreen
 } from '../reducers/mode';
-import {generateRandomUsername} from './tw-username';
+import {getUsername} from './tw-username';
 import {setSearchParams} from './tw-navigation-utils';
 import {defaultStageSize} from '../reducers/custom-stage-size';
 
@@ -282,7 +282,7 @@ const TWStateManager = function (WrappedComponent) {
                 'onSetIsFullScreen'
             ]);
         }
-        componentDidMount () {
+        async componentDidMount () {
             const urlParams = new URLSearchParams(location.search);
 
             if (urlParams.has('fps')) {
@@ -303,18 +303,12 @@ const TWStateManager = function (WrappedComponent) {
             if (urlParams.has('username')) {
                 const username = urlParams.get('username');
                 // Do not save username when loaded from URL
-                this.doNotPersistUsername = username;
                 this.props.onSetUsername(username);
             } else {
-                const persistentUsername = this.props.isEmbedded ? null : getLocalStorage(USERNAME_KEY);
-                if (persistentUsername === null) {
-                    const randomUsername = generateRandomUsername();
-                    this.props.onSetUsername(randomUsername);
-                    if (this.props.isEmbedded) {
-                        this.doNotPersistUsername = randomUsername;
-                    }
-                } else {
-                    this.props.onSetUsername(persistentUsername);
+                const randomUsername = await getUsername();
+                this.props.onSetUsername(randomUsername);
+                if (this.props.isEmbedded) {
+                    this.doNotPersistUsername = randomUsername;
                 }
             }
 
