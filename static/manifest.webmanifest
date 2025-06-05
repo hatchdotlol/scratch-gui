@@ -1,21 +1,21 @@
 {
-  "short_name": "TurboWarp",
-  "name": "TurboWarp",
-  "description": "Mod of Scratch 3 with a compiler, dark mode, and more features.",
+  "short_name": "Hatch Editor",
+  "name": "Hatch Editor",
+  "description": "Editor for hatch.lol.",
   "icons": [
     {
-      "src": "images/192.png",
+      "src": "android-chrome-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "images/512.png",
+      "src": "android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": "editor",
-  "background_color": "#333333",
+  "background_color": "#1b1b1b",
   "display": "standalone",
-  "theme_color": "#333333"
+  "theme_color": "#ffbd59"
 }
