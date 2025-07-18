@@ -1,12 +1,15 @@
-scratch-gui modified for use in [TurboWarp](https://turbowarp.org/)
+# `scratch-gui`: The GUI & Addons for the Hatch TurboWarp Editor
 
-## Setup
+> scratch-gui modified for use in [TurboWarp](https://turbowarp.org/)
 
-See https://docs.turbowarp.org/development/getting-started to setup the complete TurboWarp environment.
+See hatch.lol for more information about Hatch itself.
 
-If you just want to play with the GUI then it's the same process as upstream scratch-gui.
+Special thanks to Rayne for hosting the hatch editor while it's still in beta!
 
-## License
+
+# License
+
+Since Hatch will be using a modified version of the TurboWarp Editor, we must provide the following information: 
 
 TurboWarp's modifications to Scratch are licensed under the GNU General Public License v3.0. See LICENSE or https://www.gnu.org/licenses/ for details.
 
@@ -297,3 +300,9 @@ Here's what will happen in the project state machine:
 ## Donate
 We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://www.scratchfoundation.org/donate) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!
 -->
+---
+
+### Hatch's Socials and other Links: [Hatch Website](https://hatch.lol) | [Hatch Status](https://status.hatch.lol) | [Discord](https://discord.gg/ENTDZdaGnD) | [Twitter](https://x.com/hatch_lol) | [Bluesky](https://bsky.app/profile/hatch.lol) | [Wasteof](https://wasteof.money/users/hatch) 
+
+<sub>`This readme.md was rewritten by AutoTheKat (@TheKatHere) - Version 1`
+`license information provided by TurboWarp - nothing was changed.`</sub>
